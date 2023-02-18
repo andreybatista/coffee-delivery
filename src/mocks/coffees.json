@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "name": "Expresso Tradicional",
+    "description": "O tradicional café feito com água quente e grãos moídos",
+    "categories": [
+      {
+        "name": "Tradicional"
+      }
+    ],
+    "image": "expresso.png",
+    "value": 9.90
+  },
+  {
+    "id": 2,
+    "name": "Expresso Americano",
+    "description": "Expresso diluído, menos intenso que o tradicional",
+    "categories": [
+      {
+        "name": "Tradicional"
+      }
+    ],
+    "image": "americano.png",
+    "value": 9.90
+  },
+  {
+    "id": 3,
+    "name": "Expresso Cremoso",
+    "description": "Café expresso tradicional com espuma cremosa",
+    "categories": [
+      {
+        "name": "Tradicional"
+      }
+    ],
+    "image": "expresso-cremoso.png",
+    "value": 9.90
+  },
+  {
+    "id": 4,
+    "name": "Expresso Gelado",
+    "description": "Bebida preparada com café expresso e cubos de gelo",
+    "categories": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "gelado"
+      }
+    ],
+    "image": "cafe-gelado.png",
+    "value": 9.90
+  },
+  {
+    "id": 5,
+    "name": "Café com Leite",
+    "description": "Meio a meio de expresso tradicional com leite vaporizado",
+    "categories": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "com leite"
+      }
+    ],
+    "image": "cafe-com-leite.png",
+    "value": 9.90
+  },
+  {
+    "id": 6,
+    "name": "Latte",
+    "description": "Uma dose de café expresso com o dobro de leite e espuma cremosa",
+    "categories": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "com leite"
+      }
+    ],
+    "image": "latte.png",
+    "value": 9.90
+  }
+]
