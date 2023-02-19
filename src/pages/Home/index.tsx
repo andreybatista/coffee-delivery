@@ -1,4 +1,4 @@
-import { ShoppingCart } from "phosphor-react";
+import { Minus, Plus, ShoppingCart } from "phosphor-react";
 import { useState } from "react";
 
 import { BannerHome } from "../../components/Home/BannerHome";
@@ -38,37 +38,47 @@ export function Home() {
             return (
               <CoffeeListContainer key={coffee.id}>
 
-                <img width={120} height={120} src={`./src/assets/coffee/${coffee.image}`} />
-                <div className="categoryList">
-                  {coffee.categories.map((category: any) => {
-                    return (
-                      <span>
-                        {category.name}
-                      </span>
-                    )
-                  })}
-                </div>
-                <h2>
-                  {coffee.name}
-                </h2>
-                <p>
-                  {coffee.description}
-                </p>
+                <div>
 
-                <footer>
+                  <img width={120} height={120} src={`./src/assets/coffee/${coffee.image}`} />
+                  <div className="categoryList">
+                    {coffee.categories.map((category: any) => {
+                      return (
+                        <span>
+                          {category.name}
+                        </span>
+                      )
+                    })}
+                  </div>
+                  <h2>
+                    {coffee.name}
+                  </h2>
+                  <p>
+                    {coffee.description}
+                  </p>
+                </div>
+
+                <div className="buy">
                   <div>
-                    <span>R$ </span>
-                    <strong>9,90</strong>
+                    <span>R$ <strong>9,90</strong></span>
                   </div>
 
-                  <div>
-                    <input type="number" value={1} />
-                    <button>
-                      <ShoppingCart size={32} weight="fill" />
+                  <div className="buy__buttons">
+                    <div className="buy__input">
+                      <button>
+                        <Minus size={14} weight="fill" />
+                      </button>
+                      <input type="number" value={1} min={1} max={5} />
+                      <button>
+                        <Plus size={14} weight="fill" />
+                      </button>
+                    </div>
+                    <button className="buy__cart">
+                      <ShoppingCart size={19} weight="fill" />
                     </button>
                   </div>
 
-                </footer>
+                </div>
               </CoffeeListContainer>
             )
           })}

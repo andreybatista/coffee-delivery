@@ -12,7 +12,7 @@ export const LayoutContainer = styled.div`
   flex-direction: column;
 
   .container {
-    padding: 0 10rem;
+    padding: 0 14.375rem;
   }
 
   img {

@@ -12,10 +12,13 @@ export const HomeContainer = styled.div`
     align-items: center;
 
     color: ${(props) => props.theme["base-subtitle"]};
+
+    margin-bottom: 3.375rem;
   }
 
   .coffeeList {
     display: grid;
+
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 2rem;
     grid-row-gap: 2.5rem;
@@ -23,11 +26,16 @@ export const HomeContainer = styled.div`
 `;
 
 export const CoffeeListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+
   position: relative;
 
   background-color: ${(props) => props.theme["base-card"]};
 
-  padding: calc(1.25rem + 72px) 1.25rem 1.5rem;
+  padding: calc(1.25rem + 72px) 1.5rem 1.5rem;
   border-radius: 0.375rem 2.25rem;
 
   img {
@@ -51,9 +59,11 @@ export const CoffeeListContainer = styled.div`
     justify-content: center;
     align-items: center;
 
+    padding-top: 0.5rem;
+    gap: 0.25rem;
+
     margin-top: 0.75rem;
     margin-bottom: 1rem;
-    gap: 0.25rem;
 
     span {
       font-family: "Roboto";
@@ -95,15 +105,123 @@ export const CoffeeListContainer = styled.div`
 
     text-align: center;
     color: ${(props) => props.theme["base-label"]};
+    margin-bottom: 2.063rem;
   }
 
-  footer {
+  .buy {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 29px;
 
-    span{
-      display: inline-block;
+    span {
+      display: flex;
+      align-items: baseline;
+
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 130%;
+
+      height: 100%;
+
+      text-align: right;
+      color: ${(props) => props.theme["base-text"]};
+
+      strong {
+        display: flex;
+        align-items: center;
+
+        font-family: "Baloo 2";
+        font-weight: 800;
+        font-size: 1.5rem;
+        line-height: 1.95rem;
+
+        height: 100%;
+
+        text-align: right;
+      }
+    }
+
+    .buy__buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      align-items: center;
+
+      padding: 0px;
+      gap: 8px;
+
+      .buy__input {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        background: ${(props) => props.theme["base-button"]};
+        border-radius: 6px;
+
+        padding: 0.5rem;
+        gap: 0.25rem;
+
+        input {
+          text-align: center;
+
+          background: transparent;
+
+          border: none;
+
+          &::-webkit-inner-spin-button,
+          &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+
+        button {
+          display: flex;
+          
+          border: none;
+          background-color: transparent;
+
+          color: ${(props) => props.theme["purple"]};
+
+          cursor: pointer;
+          transition: 0.2s all ease;
+
+          &:hover {
+            color: ${(props) => props.theme["purple-dark"]};
+          }
+        }
+      }
+
+      .buy__cart {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+        gap: 0.5rem;
+
+        width: 38px;
+        height: 38px;
+
+        background: ${(props) => props.theme["purple-dark"]};
+        border-radius: 6px;
+        border: none;
+
+        color: ${(props) => props.theme["base-card"]};
+
+        cursor: pointer;
+        transition: 0.2s all ease;
+
+        &:hover {
+          background: ${(props) => props.theme["purple"]};
+        }
+      }
     }
   }
 `;
