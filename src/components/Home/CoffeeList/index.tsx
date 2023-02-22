@@ -1,23 +1,12 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
-import CurrencyFormat from 'react-currency-format';
+
+import { Coffee } from "../../../reducers/coffee/reducer";
 
 import { CoffeeListContainer } from "./styles";
 
-export interface CoffeeType {
-  id: number;
-  name: string;
-  description: string;
-  categories: CoffeeCategoryType[];
-  image: string;
-  value: number;
-}
 
-interface CoffeeCategoryType {
-  name: string;
-}
-
-export function CoffeeList({ id, image, categories, name, description, value }: CoffeeType) {
+export function CoffeeList({ id, image, categories, name, description, value }: Coffee) {
   const [qyt, setQyt] = useState(1);
 
   const [valueCoffee, setValueCoffee] = useState(value)
@@ -33,6 +22,19 @@ export function CoffeeList({ id, image, categories, name, description, value }: 
       return setQyt(1)
     }
     setQyt((state) => state - 1)
+  }
+  function handleSetValue(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.value == '') {
+      return setQyt(1)
+    }
+    if (parseInt(e.target.value) >= 99) {
+      return setQyt(99)
+    }
+    if (parseInt(e.target.value) <= 1) {
+      return setQyt(1)
+    }
+
+    setQyt(parseInt(e.target.value))
   }
 
   useEffect(() => {
@@ -72,12 +74,12 @@ export function CoffeeList({ id, image, categories, name, description, value }: 
             <button type="button" value='Button Add' onClick={handleLessQyt}>
               <Minus size={14} weight="fill" />
             </button>
-            <input type="number" onChange={e => setQyt(parseInt(e.target.value))} value={qyt} min={1} max={5} />
+            <input type="number" onChange={(e) => handleSetValue(e)} value={qyt} min={1} max={5} />
             <button type="button" onClick={handleMoreOneQyt}>
               <Plus size={14} weight="fill" />
             </button>
           </div>
-          <button className="buy__cart">
+          <button onClick={addToCart(id)} className="buy__cart">
             <ShoppingCart size={19} weight="fill" />
           </button>
         </div>
