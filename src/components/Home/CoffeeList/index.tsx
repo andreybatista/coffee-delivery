@@ -1,15 +1,17 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
 
 import { Coffee } from "../../../reducers/coffee/reducer";
 
 import { CoffeeListContainer } from "./styles";
+import { CoffeeContext } from "../../../contexts/CoffeeContext";
 
 
 export function CoffeeList({ id, image, categories, name, description, value }: Coffee) {
   const [qyt, setQyt] = useState(1);
-
   const [valueCoffee, setValueCoffee] = useState(value)
+
+  const { addToCart } = useContext(CoffeeContext)
 
   function handleMoreOneQyt() {
     if (qyt >= 99) {
@@ -40,6 +42,10 @@ export function CoffeeList({ id, image, categories, name, description, value }: 
   useEffect(() => {
     setValueCoffee(qyt * value)
   }, [qyt])
+
+  function handleAddToCart() {
+    addToCart(valueCoffee, id)
+  }
 
   return (
     <CoffeeListContainer key={id}>
@@ -79,7 +85,7 @@ export function CoffeeList({ id, image, categories, name, description, value }: 
               <Plus size={14} weight="fill" />
             </button>
           </div>
-          <button onClick={addToCart(id)} className="buy__cart">
+          <button onClick={handleAddToCart} className="buy__cart">
             <ShoppingCart size={19} weight="fill" />
           </button>
         </div>

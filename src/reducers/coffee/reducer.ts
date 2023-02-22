@@ -9,30 +9,42 @@ export interface Coffee {
   value: number;
 }
 
+export interface CountItemCart {
+  id: number;
+  qyt: number;
+}
+
 interface CoffeeCategoryType {
   name: string;
 }
 
 interface CoffeeState {
   coffees: Coffee[];
-  coffeesCart: string | null;
+  coffeesCart?: CountItemCart[];
 }
 
 export function coffeesReducer(state: CoffeeState, action: any) {
-  console.log(state);
   switch (action.type) {
     case ActionTypes.ADD_CART: {
-
-      const currentCycleIndex = state.coffees.findIndex((coffee) => {
-        return coffee.id === state.coffees.id;
+      const addCurrentCoffeeCart = state.coffees.find((coffee) => {
+        return coffee.id === action.payload.coffeeId;
       });
-      if (currentCycleIndex < 0) {
+
+      if (!addCurrentCoffeeCart) {
         return state;
       }
-      // return produce(state, (draft) => {
-      //   draft.cycles[currentCycleIndex].interruptedDate = new Date();
-      //   draft.activeCycleId = null;
-      // });
+
+      let arrayCart: CountItemCart[];
+
+      if (state.coffeesCart) {
+        arrayCart = [...state.coffeesCart, addCurrentCoffeeCart];
+      } else {
+        arrayCart = [addCurrentCoffeeCart];
+      }
+      return {
+        coffees: state.coffees,
+        coffeesCart: arrayCart,
+      };
     }
     // case ActionTypes.INTERRUPT_CURRENT_CYCLE: {
     //   const currentCycleIndex = state.cycles.findIndex((cycle) => {

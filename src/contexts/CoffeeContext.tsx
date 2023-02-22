@@ -14,7 +14,7 @@ interface CoffeesContextProviderProps {
 interface CoffeesContextType {
   coffees: Coffee[]
   coffeesCart: Coffee[] | null
-  addToCart: (coffeesCart: Coffee[]) => void
+  addToCart: (id: number, coffeeId: number) => void
   // activeCycle: Cycle | undefined
   // activeCycleId: string | null
   // amountSecondsPassed: number
@@ -28,7 +28,6 @@ export const CoffeeContext = createContext({} as CoffeesContextType)
 export function CoffeeContextProvider({
   children,
 }: CoffeesContextProviderProps) {
-
   const [coffeesState, dispatch] = useReducer(
     coffeesReducer,
     {
@@ -56,8 +55,8 @@ export function CoffeeContextProvider({
   )
   const { coffees, coffeesCart } = coffeesState
 
-  function addToCart(data: Coffee[]) {
-    dispatch(addToCartAction(coffeesCart))
+  function addToCart(qyt: number, coffeeId: number) {
+    dispatch(addToCartAction(qyt, coffeeId))
   }
 
 

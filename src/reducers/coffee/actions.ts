@@ -4,11 +4,12 @@ export enum ActionTypes {
   ADD_CART = "ADD_CART",
 }
 
-export function addToCartAction(coffeesCart: Coffee) {
+export function addToCartAction(qyt: number, coffeeId: number) {
   return {
     type: ActionTypes.ADD_CART,
     payload: {
-      coffeesCart,
+      qyt,
+      coffeeId,
     },
   };
 }
