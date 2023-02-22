@@ -1,17 +1,16 @@
-import { Minus, Plus, ShoppingCart } from "phosphor-react";
-import { useState } from "react";
+import { useContext } from "react";
 
 import { BannerHome } from "../../components/Home/BannerHome";
-import { CoffeeList, CoffeeType } from "../../components/Home/CoffeeList";
+import { CoffeeList } from "../../components/Home/CoffeeList";
 
-import dataCoffees from "../../mocks/coffees.json";
+import { CoffeeContext } from "../../contexts/CoffeeContext";
 
 import { HomeContainer } from "./styles";
 
 
 
 export function Home() {
-  const [coffee, setCoffee] = useState<CoffeeType[]>(dataCoffees);
+  const { coffees } = useContext(CoffeeContext)
 
   return (
     <HomeContainer>
@@ -27,7 +26,7 @@ export function Home() {
         <div className="coffeeList">
 
           {
-            coffee.map((coffee) => {
+            coffees.map((coffee) => {
               return <CoffeeList key={coffee.id} id={coffee.id} image={coffee.image} categories={coffee.categories} name={coffee.name} description={coffee.description} value={coffee.value} />
             })
           }
