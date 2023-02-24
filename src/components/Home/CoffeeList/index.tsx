@@ -44,7 +44,7 @@ export function CoffeeList({ id, image, categories, name, description, value }: 
   }, [qyt])
 
   function handleAddToCart() {
-    addToCart(valueCoffee, id)
+    addToCart(qyt, id)
   }
 
   return (

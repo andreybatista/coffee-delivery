@@ -9,7 +9,7 @@ import { HeaderContainer } from './styles'
 
 export function Header() {
   const { coffeesCart } = useContext(CoffeeContext)
-  console.log(coffeesCart)
+
   return (
     <HeaderContainer className='container'>
       <img src={logo} alt="" />
