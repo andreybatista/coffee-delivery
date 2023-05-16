@@ -26,22 +26,6 @@ interface CoffeeState {
 }
 
 export function coffeesReducer(state: CoffeeState, action: any) {
-  function organizandoObjeto(arr: any) {
-    let memory = {
-      temp: [],
-      result: [],
-    };
-
-    arr.map((o) => {
-      if (!memory.temp.includes(o.coffeeId)) {
-        memory.temp.push(o.coffeeId);
-        const qyt = dados.filter((t) => t.coffeeId === o.coffeeId);
-        memory.result.push({ coffeeId: o.coffeeId, qyt: qyt });
-      }
-    });
-
-    return memory.result;
-  }
   switch (action.type) {
     case ActionTypes.ADD_CART: {
       const addCurrentCoffeeCart = state.coffees.find((coffee) => {
@@ -54,72 +38,65 @@ export function coffeesReducer(state: CoffeeState, action: any) {
 
       let data: CoffeeState;
 
+      const coffeesCart = [
+        { qyt: 1, coffeeId: 1 },
+        { qyt: 2, coffeeId: 1 },
+        { qyt: 2, coffeeId: 3 },
+        { qyt: 2, coffeeId: 4 },
+        { qyt: 2, coffeeId: 1 },
+        { qyt: 2, coffeeId: 1 },
+      ];
+
+      function groupBy(arr: { qyt: number, coffeeId: number }[]): { qyt: number, coffeeId: number }[] {
+        const resultado: { qyt: number, coffeeId: number }[] = [];
+      
+        arr.forEach(objeto => {
+          const index = resultado.findIndex(item => item.coffeeId === objeto.coffeeId);
+      
+          if (index !== -1) {
+            resultado[index].qyt += objeto.qyt;
+          } else {
+            resultado.push({ qyt: objeto.qyt, coffeeId: objeto.coffeeId });
+          }
+        });
+      
+        return resultado;
+      }
+      const groupedArray = groupBy(coffeesCart);
+      console.log(groupedArray);
+
       if (state.coffeesCart) {
-        data = {
-          coffees: state.coffees,
-          coffeesCart: [...state.coffeesCart, action.payload],
-        };
+        const itemCart = state.coffeesCart.find((coffee) => {
+          return coffee.coffeeId === action.payload.coffeeId;
+        });
+
+        if (itemCart) {
+          const arrayItem = {
+            qyt: itemCart.qyt + action.payload.qyt,
+            coffeeId: itemCart.coffeeId,
+          };
+          // console.log(arrayItem);
+          data = {
+            coffees: state.coffees,
+            coffeesCart: [...state.coffeesCart, arrayItem],
+          };
+        } else {
+          data = {
+            coffees: state.coffees,
+            coffeesCart: [...state.coffeesCart, action.payload],
+          };
+        }
       } else {
         data = {
           coffees: state.coffees,
           coffeesCart: [action.payload],
         };
       }
-
-      const users = [
-        {
-          id: 1,
-          name: "Expresso Tradicional",
-          description:
-            "O tradicional café feito com água quente e grãos moídos",
-          categories: [
-            {
-              name: "Tradicional",
-            },
-          ],
-          image: "expresso.png",
-          value: 9.9,
-        },
-        {
-          id: 2,
-          name: "Expresso Americano",
-          description: "Expresso diluído, menos intenso que o tradicional",
-          categories: [
-            {
-              name: "Tradicional",
-            },
-          ],
-          image: "americano.png",
-          value: 9.9,
-        },
-        {
-          id: 1,
-          name: "Expresso Tradicional",
-          description:
-            "O tradicional café feito com água quente e grãos moídos",
-          categories: [
-            {
-              name: "Tradicional",
-            },
-          ],
-          image: "expresso.png",
-          value: 9.9,
-        },
-      ];
-
-      function groupBy(array: any, key: any) {
-        return array.reduce((hash: any, obj: any) => {
-          if (obj[key] === undefined) return hash;
-          return Object.assign(hash, {
-            [obj[key]]: (hash[obj[key]] || []).concat(obj),
-          });
-        }, {});
-      }
-      const groupedArray = groupBy(users, "id");
-      console.log(groupedArray);
+      // console.log(data);
 
       return data;
     }
+
     // case ActionTypes.INTERRUPT_CURRENT_CYCLE: {
     //   const currentCycleIndex = state.cycles.findIndex((cycle) => {
     //     return cycle.id === state.activeCycleId

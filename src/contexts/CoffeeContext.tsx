@@ -56,6 +56,7 @@ export function CoffeeContextProvider({
   const { coffees, coffeesCart } = coffeesState
 
   function addToCart(qyt: number, coffeeId: number) {
+    // console.log('id',coffeeId )
     dispatch(addToCartAction(qyt, coffeeId))
   }
 
