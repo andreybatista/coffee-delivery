@@ -47,10 +47,11 @@ export function coffeesReducer(state: CoffeeState, action: any) {
         { qyt: 2, coffeeId: 1 },
       ];
 
-      function groupBy(arr: { qyt: number, coffeeId: number }[]): { qyt: number, coffeeId: number }[] {
+      // function groupBy(arr: { qyt: number, coffeeId: number }[]): { qyt: number, coffeeId: number }[] {
+      function groupBy(arr: { qyt: number, coffeeId: number }[]) {
         const resultado: { qyt: number, coffeeId: number }[] = [];
       
-        arr.forEach(objeto => {
+        arr.forEach(objeto   {
           const index = resultado.findIndex(item => item.coffeeId === objeto.coffeeId);
       
           if (index !== -1) {
